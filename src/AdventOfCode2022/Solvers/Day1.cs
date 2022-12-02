@@ -2,7 +2,7 @@
 {
     public class Day1
     {
-        [Solver(Name = "1.1", TimingIterations = 100000, Data = "1.txt")]
+        [Solver(Name = "1.1", TimingIterations = 300000, Data = "1.txt")]
         public static object Part1(string input)
         {
             var currentElfTotal = 0;
@@ -36,7 +36,7 @@
             return maxElfTotal_result;
         }
 
-        [Solver(Name = "1.2", TimingIterations = 100000, Data = "1.txt")]
+        [Solver(Name = "1.2", TimingIterations = 300000, Data = "1.txt")]
         public static object Part2(string input)
         {
             var currentFoodItem = 0;

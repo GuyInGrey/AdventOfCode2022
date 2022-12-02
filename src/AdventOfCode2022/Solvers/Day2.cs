@@ -30,7 +30,7 @@ namespace AdventOfCode2022.Solvers
             return finalScore;
         }
 
-        [Solver(Name = "2.1", TimingIterations = 100000, Data = "2.txt")]
+        [Solver(Name = "2.1", TimingIterations = 300000, Data = "2.txt")]
         public static object Part1(string input)
         {
             var plays = new Dictionary<int, int>()
@@ -49,7 +49,7 @@ namespace AdventOfCode2022.Solvers
             return Calculate(plays, input);
         }
 
-        [Solver(Name = "2.2", TimingIterations = 100000, Data = "2.txt")]
+        [Solver(Name = "2.2", TimingIterations = 300000, Data = "2.txt")]
         public static object Part2(string input)
         {
             var plays = new Dictionary<int, int>()
