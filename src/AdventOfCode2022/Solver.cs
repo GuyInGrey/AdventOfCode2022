@@ -1,8 +1,10 @@
 ﻿namespace AdventOfCode2022
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Method)]
     public class SolverAttribute : Attribute
     {
-        public int Day;
+        public string Name;
+        public int TimingIterations;
+        public string Data;
     }
 }

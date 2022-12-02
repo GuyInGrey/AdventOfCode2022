@@ -3,14 +3,14 @@ using System.Text;
 
 namespace AdventOfCode2022.Solvers
 {
-    [Solver(Day = 1)]
     public class Day1
     {
-        public object Part1(string input)
+        [Solver(Name = "1.1", TimingIterations = 100000, Data = "1.txt")]
+        public static object Part1(string input)
         {
             var currentElfTotal = 0;
             var maxElfTotal_result = 0;
-            int currentFoodItem = 0;
+            var currentFoodItem = 0;
 
             for (var i = 0; i < input.Length; i++)
             {
@@ -30,18 +30,44 @@ namespace AdventOfCode2022.Solvers
                     currentElfTotal = 0;
                 }
             }
+            if (currentFoodItem > 0)
+            {
+                currentElfTotal += currentFoodItem;
+                if (currentElfTotal > maxElfTotal_result) { maxElfTotal_result = currentElfTotal; }
+            }
 
             return maxElfTotal_result;
         }
 
-        public object Part2(string input)
+        [Solver(Name = "1.2", TimingIterations = 100000, Data = "1.txt")]
+        public static object Part2(string input)
         {
-            var elves = input.Trim().Split("\n\n");
-            var groupedElfCalories = elves.Select(e =>
+            var currentFoodItem = 0;
+            var currentElfTotal = 0;
+            var elves = new List<int>(512);
+
+            for (var i = 0; i < input.Length; i++)
             {
-                return e.Split('\n').Select(c => int.Parse(c.Trim())).Sum();
-            });
-            var top3 = groupedElfCalories.OrderByDescending(t => t).Take(3);
+                var c = input[i];
+                if (c >= 48 && c <= 57) // If the character is a number
+                {
+                    currentFoodItem = currentFoodItem * 10 + (c - '0');
+                }
+                else if (currentFoodItem > 0) // If the previous character was a number
+                {
+                    currentElfTotal += currentFoodItem;
+                    currentFoodItem = 0;
+                }
+                else // Double new-line, meaning new elf
+                {
+                    elves.Add(currentElfTotal);
+                    currentElfTotal = 0;
+                }
+            }
+            currentElfTotal += currentFoodItem;
+            elves.Add(currentElfTotal);
+
+            var top3 = elves.OrderByDescending(o => o).Take(3);
             return top3.Sum();
         }
     }
