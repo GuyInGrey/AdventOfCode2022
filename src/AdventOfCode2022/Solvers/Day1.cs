@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-
-namespace AdventOfCode2022.Solvers
+﻿namespace AdventOfCode2022.Solvers
 {
     public class Day1
     {

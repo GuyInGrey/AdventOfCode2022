@@ -23,6 +23,7 @@ namespace AdventOfCode2022
             var timings = Console.ReadKey().Key == ConsoleKey.Y;
             Console.WriteLine("\nWarming up...");
 
+            var readme = "# Grey's 2022 Advent Of Code\n\n#### Timings\n\nName | Iterations Ran | Time Per Iteration\n-- | -- | --\n";
 
             foreach (var (attr, method) in toRun)
             {
@@ -64,6 +65,12 @@ namespace AdventOfCode2022
                 }
 
                 Console.WriteLine($"{attr.Name} - Completed {iterations} iterations at {durationText}/iteration. Result: {result}");
+                readme += attr.Name + " | " + iterations + " | " + durationText + "\n";
+            }
+
+            if (timings && input == "all")
+            {
+                File.WriteAllText(@"..\..\..\..\..\README.md", readme);
             }
         }
     }
