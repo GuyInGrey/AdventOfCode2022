@@ -8,6 +8,8 @@ namespace AdventOfCode2022
     {
         static void Main()
         {
+            Thread.CurrentThread.Priority = ThreadPriority.Highest;
+
             var methods = Assembly.GetExecutingAssembly()
                 .GetTypes().SelectMany(type => type.GetMethods())
                 .Select(method => (method, method.GetCustomAttribute<SolverAttribute>()))
@@ -21,18 +23,23 @@ namespace AdventOfCode2022
 
             Console.Write("Timings? (Y/N): ");
             var timings = Console.ReadKey().Key == ConsoleKey.Y;
-            Console.WriteLine("\nWarming up...");
+            Console.WriteLine();
 
-            var readme = "# Grey's 2022 Advent Of Code\n\n#### Timings\n\nName | Iterations Ran | Time Per Iteration\n-- | -- | --\n";
+            var readme = "# Grey's 2022 Advent Of Code\n\n#### Timings\n\nName | Iterations Ran | Time Per Iteration (+- ~10%)\n-- | -- | --\n";
 
-            foreach (var (attr, method) in toRun)
+            if (timings)
             {
-                var data = File.ReadAllText(@"..\..\..\Data\" + attr.Data);
-                var iterations = 10000;
+                Console.WriteLine("Warming up...");
 
-                for (var i = 0; i < iterations; i++)
+                foreach (var (attr, method) in toRun)
                 {
-                    method.Invoke(null, new object[] { data });
+                    var data = File.ReadAllText(@"..\..\..\Data\" + attr.Data);
+                    var iterations = 10000;
+
+                    for (var i = 0; i < iterations; i++)
+                    {
+                        method.Invoke(null, new object[] { data });
+                    }
                 }
             }
 
