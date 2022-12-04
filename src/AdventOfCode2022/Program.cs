@@ -52,12 +52,12 @@ namespace AdventOfCode2022
 
                 var result = method.Invoke(null, new object[] { data });
 
-                var start = DateTime.Now;
+                var start = HighResolutionDateTime.UtcNow;
                 for (var i = 0; i < iterations; i++)
                 {
                     method.Invoke(null, new object[] { data });
                 }
-                var end = DateTime.Now;
+                var end = HighResolutionDateTime.UtcNow;
 
                 var durationText = "";
 
